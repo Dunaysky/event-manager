@@ -1,23 +1,59 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
 AllCops:
-  TargetRubyVersion: 2.6
+  NewCops: enable
   Exclude:
-    - 'db/**/*'
-    - 'bin/*'
-    - 'config/**/*'
+    - "bin/**/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "vendor/**/*"
+    - "lib/tasks/**/*"
     - 'Gemfile'
     - 'Gemfile.lock'
     - 'Rakefile'
+    - 'config.ru'
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
-  NewCops: enable
-require: 
-  - rubocop-rails
-  - rubocop-rspec
-
-# Check with yard instead.
 Style/Documentation:
   Enabled: false
-
-# Frozen Literals
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: never
+Layout/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 30
+Metrics/BlockLength:
+  Max: 30
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 8
+Naming/VariableNumber:
+  Enabled: false
+Rails/ApplicationController:
+  Enabled: false
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/MultipleDescribes:
+  Enabled: false
+RSpec/ExampleLength:
+  Max: 10
+Rails/I18nLocaleTexts:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 5
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: false

@@ -1,0 +1,64 @@
+name: Verify
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up ruby
+        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+      - name: Install gems
+        run: bundle install
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get -yqq install libpq-dev
+      - name: Build App
+        env:
+          DATABASE_USERNAME: postgres
+          DATABASE_PASSWORD: postgres
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:create db:migrate db:test:prepare
+      - name: Run Rspec
+        env:
+          DATABASE_USERNAME: postgres
+          DATABASE_PASSWORD: postgres
+          RAILS_ENV: test
+        run: bundle exec rspec
+
+  Rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up ruby
+        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+      - name: Install gems
+        run: bundle install
+
+      - name: Run Rubocop
+        run: bundle exec rubocop
