@@ -1,0 +1,23 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'config/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+  NewCops: enable
+require: 
+  - rubocop-rails
+  - rubocop-rspec
+
+# Check with yard instead.
+Style/Documentation:
+  Enabled: false
+
+# Frozen Literals
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
