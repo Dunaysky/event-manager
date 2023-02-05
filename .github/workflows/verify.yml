@@ -2,9 +2,9 @@ name: Verify
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   Rspec:
@@ -62,4 +62,3 @@ jobs:
 
       - name: Run Rubocop
         run: bundle exec rubocop
-
