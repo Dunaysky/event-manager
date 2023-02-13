@@ -1,13 +1,11 @@
 class CreateEventUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :event_users do |t|
-      t.integer :event_id
-      t.integer :user_id
+      t.references :event, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
       t.boolean :creator
 
       t.timestamps
     end
-    add_index :event_users, :event_id
-    add_index :event_users, :user_id
   end
 end

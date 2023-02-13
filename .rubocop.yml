@@ -57,12 +57,12 @@ RSpec/AnyInstance:
   Enabled: false
 RSpec/FactoryBot/SyntaxMethods:
   Enabled: false
-# RSpec/ContextWording:
-#   Prefixes:
-#     - when
-#     - with
-#     - without
-#     - if
-#     - unless
-#     - for
-#     - has
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - if
+    - unless
+    - for
+    - has
