@@ -31,4 +31,4 @@
 /config/master.key
 
 # Ignore code coverage directory
-/covarage/*
+/coverage/*
