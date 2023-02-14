@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Event do
-  context 'when have many event_users' do
+  context 'has many event_users' do
     it { is_expected.to have_many(:event_users) }
   end
 
-  context 'when has a valid factory' do
+  context 'has a valid factory' do
     it { expect(create(:event)).to be_valid }
   end
 

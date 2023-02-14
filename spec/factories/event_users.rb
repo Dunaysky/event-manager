@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :event_user do
-    event_id { Faker::Number.within(range: 1..10) }
-    user_id { Faker::Number.within(range: 1..10) }
+    event
+    user
     creator { true }
   end
 end
