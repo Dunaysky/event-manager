@@ -4,12 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'Event' do
   describe 'POST /events' do
+    let!(:user) { create(:user) }
     let(:event_params) do
       {
         event: {
           title: 'Morning meeting',
           description: 'Meeting on current project',
-          date: Date.tomorrow
+          date: Date.tomorrow,
+          user_ids: [user.id]
         }
       }
     end
@@ -59,11 +61,11 @@ RSpec.describe 'Event' do
     it 'returns json representation of the event' do
       get "/events/#{event.id}"
 
-      expect(json.dig('data', 'attributes', 'eventTitle'))
+      expect(json.dig('data', 'attributes', 'title'))
         .to eq(event.title)
       expect(json.dig('data', 'attributes', 'eventDate'))
         .to eq(event.date.to_fs(:short))
-      expect(json.dig('data', 'attributes', 'eventDescription'))
+      expect(json.dig('data', 'attributes', 'description'))
         .to eq(event.description)
     end
 
@@ -84,8 +86,8 @@ RSpec.describe 'Event' do
     let!(:number_of_events) { 2 }
     let!(:events) { create_list(:event, number_of_events) }
     let!(:first_event) { events.first }
-    let(:description_path) { %w[attributes eventDescription] }
-    let(:title_path) { %w[attributes eventTitle] }
+    let(:description_path) { %w[attributes description] }
+    let(:title_path) { %w[attributes title] }
     let(:date_path) { %w[attributes eventDate] }
 
     it 'returns more than one event' do
