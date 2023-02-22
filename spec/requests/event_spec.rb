@@ -92,6 +92,11 @@ RSpec.describe 'Event' do
     let(:description_path) { %w[attributes description] }
     let(:title_path) { %w[attributes title] }
     let(:date_path) { %w[attributes eventDate] }
+    let(:event_to_compare) do
+      json['data'].find do |event|
+        event['id'].to_i == first_event.id
+      end
+    end
 
     it 'returns more than one event' do
       get '/events'
@@ -101,10 +106,6 @@ RSpec.describe 'Event' do
 
     it 'returns properly serialized events' do
       get '/events'
-
-      event_to_compare = json['data'].find do |event|
-        event['id'].to_i == first_event.id
-      end
 
       expect(event_to_compare.dig(*description_path))
         .to eq(first_event.description)
