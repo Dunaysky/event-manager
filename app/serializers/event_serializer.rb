@@ -5,5 +5,5 @@ class EventSerializer
   attributes :id, :title, :description
   attribute :eventDate do |object|
     object.date.to_fs(:short)
-  end 
+  end
 end

@@ -24,34 +24,37 @@ RSpec.describe 'Event' do
       }
     end
 
-    it 'creates event record' do
-      expect do
+    context 'when create events without errors' do
+      it 'creates event record' do
+        expect do
+          post '/events', params: event_params
+        end.to change(Event, :count).by(1)
+      end
+
+      it 'returns "created" status' do
         post '/events', params: event_params
-      end.to change(Event, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+      end
+
+      it 'returns informative message' do
+        post '/events', params: event_params
+
+        expect(json).to eq('Event was successfully created')
+      end
     end
 
-    it 'returns "created" status' do
-      post '/events', params: event_params
+    context 'when create events with errors' do
+      it 'Do not create event without date' do
+        expect do
+          post '/events', params: invalid_params
+        end.not_to change(Event, :count)
+      end
 
-      expect(response).to have_http_status(:created)
-    end
-
-    it 'returns informative message' do
-      post '/events', params: event_params
-
-      expect(json).to eq('Event was successfully created')
-    end
-
-    it 'Do not create event without date' do
-      expect do
+      it 'returns "unprocessable_entity" status' do
         post '/events', params: invalid_params
-      end.not_to change(Event, :count)
-    end
-
-    it 'returns "unprocessable_entity" status' do
-      post '/events', params: invalid_params
-
-      expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 
@@ -113,11 +116,18 @@ RSpec.describe 'Event' do
   end
 
   describe 'PUT /events/:event_id' do
+    let!(:user) { create(:user) }
     let(:title) { 'Original title' }
     let(:description) { 'Original description' }
     let(:date) { Date.tomorrow }
 
-    let(:event) { create(:event, title: title, description: description, date: date) }
+    let(:event) do
+      create(:event,
+             title: title,
+             description: description,
+             date: date,
+             user_ids: [user.id])
+    end
 
     let(:updated_title) { 'Updated title' }
     let(:updated_description) { 'Updated description' }
