@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Event' do
-  describe 'POST /events' do
+  describe 'POST /api/v1/events' do
     let!(:user) { create(:user) }
     let(:event_params) do
       {
@@ -27,18 +27,18 @@ RSpec.describe 'Event' do
     context 'when create events without errors' do
       it 'creates event record' do
         expect do
-          post '/events', params: event_params
+          post '/api/v1/events', params: event_params
         end.to change(Event, :count).by(1)
       end
 
       it 'returns "created" status' do
-        post '/events', params: event_params
+        post '/api/v1/events', params: event_params
 
         expect(response).to have_http_status(:created)
       end
 
       it 'returns informative message' do
-        post '/events', params: event_params
+        post '/api/v1/events', params: event_params
 
         expect(json).to eq('Event was successfully created')
       end
@@ -47,12 +47,12 @@ RSpec.describe 'Event' do
     context 'when create events with errors' do
       it 'Do not create event without date' do
         expect do
-          post '/events', params: invalid_params
+          post '/api/v1/events', params: invalid_params
         end.not_to change(Event, :count)
       end
 
       it 'returns "unprocessable_entity" status' do
-        post '/events', params: invalid_params
+        post '/api/v1/events', params: invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe 'Event' do
     let!(:event) { create(:event) }
 
     it 'returns json representation of the event' do
-      get "/events/#{event.id}"
+      get "/api/v1/events/#{event.id}"
 
       expect(json.dig('data', 'attributes', 'title'))
         .to eq(event.title)
@@ -73,13 +73,13 @@ RSpec.describe 'Event' do
     end
 
     it 'returns appropriate status' do
-      get "/events/#{event.id}"
+      get "/api/v1/events/#{event.id}"
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'handles id that is out of range' do
-      get '/events/1000000'
+      get '/api/v1/events/1000000'
 
       expect(response).to have_http_status(:not_found)
     end
@@ -99,13 +99,13 @@ RSpec.describe 'Event' do
     end
 
     it 'returns more than one event' do
-      get '/events'
+      get '/api/v1/events'
       expect(response).to have_http_status(:ok)
       expect(json['data']&.count).to eq(number_of_events)
     end
 
     it 'returns properly serialized events' do
-      get '/events'
+      get '/api/v1/events'
 
       expect(event_to_compare.dig(*description_path))
         .to eq(first_event.description)
@@ -146,7 +146,7 @@ RSpec.describe 'Event' do
 
     it 'updates given properties' do
       expect do
-        put "/events/#{event.id}", params: updated_event_params
+        put "/api/v1/events/#{event.id}", params: updated_event_params
         event.reload
       end.to change(event, :title).to(updated_title)
          .and change(event, :description).to(updated_description)
@@ -154,7 +154,7 @@ RSpec.describe 'Event' do
     end
 
     it 'returns appropriate status' do
-      put "/events/#{event.id}", params: updated_event_params
+      put "/api/v1/events/#{event.id}", params: updated_event_params
 
       expect(response).to have_http_status(:ok)
     end
@@ -167,7 +167,7 @@ RSpec.describe 'Event' do
     let(:event) { create(:event, title: title, description: description, date: date) }
 
     it 'deletes given event' do
-      delete "/events/#{event.id}"
+      delete "/api/v1/events/#{event.id}"
 
       expect { event.reload }
         .to raise_error(ActiveRecord::RecordNotFound)
