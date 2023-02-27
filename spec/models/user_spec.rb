@@ -17,7 +17,7 @@ RSpec.describe User do
   end
 
   context 'if e-mail is unique and valid' do
-    it { is_expected.to validate_uniqueness_of(:email) }
+    it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
     it { expect(build(:user, email: 'invalid')).not_to be_valid }
   end
 end
