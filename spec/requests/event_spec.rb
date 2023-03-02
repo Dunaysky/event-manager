@@ -3,8 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Event' do
+  let!(:user) { create(:user) }
+
+  before do
+    sign_in user
+  end
+
   describe 'POST /api/v1/events' do
-    let!(:user) { create(:user) }
     let(:event_params) do
       {
         event: {
@@ -117,7 +122,6 @@ RSpec.describe 'Event' do
   end
 
   describe 'PUT /events/:event_id' do
-    let!(:user) { create(:user) }
     let(:title) { 'Original title' }
     let(:description) { 'Original description' }
     let(:date) { Date.tomorrow }
