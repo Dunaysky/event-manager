@@ -15,8 +15,7 @@ RSpec.describe 'Event' do
         event: {
           title: 'Morning meeting',
           description: 'Meeting on current project',
-          date: Date.tomorrow,
-          user_ids: [user.id]
+          date: Date.tomorrow
         }
       }
     end

@@ -13,9 +13,9 @@ module Api
       end
 
       def create
-        event = Event.new(event_params)
+        event = Event::Create.call(event_params)
 
-        if event.save
+        if event.valid?
           render(json: 'Event was successfully created'.to_json, status: :created)
         else
           render(json: event.errors.full_messages, status: :unprocessable_entity)
@@ -37,7 +37,7 @@ module Api
       private
 
       def event_params
-        params.require(:event).permit(:title, :description, :date, user_ids: [])
+        params.require(:event).permit(:title, :description, :date).merge!(user_ids: [current_user.id])
       end
 
       def event
