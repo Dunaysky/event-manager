@@ -13,8 +13,7 @@ module Api
       end
 
       def create
-        event = Event::Create.call(event_params.merge!(user_ids: [current_user.id]))
-
+        event = Event::Create.call(event_params, current_user)
         if event.valid?
           render(json: 'Event was successfully created'.to_json, status: :created)
         else
@@ -24,16 +23,6 @@ module Api
 
       def update
         if event.update(event_params)
-          if params[:user_ids]
-            event_user_params = { event_id: event.id, user_id: params[:user_ids][0].to_i, creator: false }
-            event_user = EventUser.new(event_user_params)
-            if event_user.save
-              render(json: 'User was added to event'.to_json, status: :ok)
-            else
-              render(json: 'User wasnt added to event'.to_json, status: :unprocessable_entity)
-            end
-            return
-          end
           render(json: 'Event was successfully updated'.to_json, status: :ok)
         else
           render(json: 'Event wasnt updated'.to_json, status: :unprocessable_entity)

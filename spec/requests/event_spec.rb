@@ -15,7 +15,8 @@ RSpec.describe 'Event' do
         event: {
           title: 'Morning meeting',
           description: 'Meeting on current project',
-          date: Date.tomorrow
+          date: Date.tomorrow,
+          user_ids: [user.id]
         }
       }
     end
@@ -137,12 +138,22 @@ RSpec.describe 'Event' do
         event: {
           title: updated_title,
           description: updated_description,
-          date: updated_date
+          date: updated_date,
+          user_ids: [user.id]
         }
       }
     end
     let(:another_user) { create(:user) }
-    let(:another_user_params) { updated_event_params.merge!(user_ids: [another_user.id]) }
+    let(:another_user_params) do
+      {
+        event: {
+          title: updated_title,
+          description: updated_description,
+          date: updated_date,
+          user_ids: [user.id, another_user.id]
+        }
+      }
+    end
 
     it 'updates given properties' do
       expect do

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :events, only: %i[index create show update destroy]
-      resources :users, only: %i[index]
+      resources :users, only: %i[index] do
+        get :current_user_details
+      end
     end
   end
 end
