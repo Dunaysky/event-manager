@@ -3,8 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Event' do
+  let!(:user) { create(:user) }
+
+  before do
+    sign_in user
+  end
+
   describe 'POST /api/v1/events' do
-    let!(:user) { create(:user) }
     let(:event_params) do
       {
         event: {
@@ -29,6 +34,7 @@ RSpec.describe 'Event' do
         expect do
           post '/api/v1/events', params: event_params
         end.to change(Event, :count).by(1)
+           .and change(EventUser, :count).by(1)
       end
 
       it 'returns "created" status' do
@@ -117,29 +123,34 @@ RSpec.describe 'Event' do
   end
 
   describe 'PUT /events/:event_id' do
-    let!(:user) { create(:user) }
-    let(:title) { 'Original title' }
-    let(:description) { 'Original description' }
-    let(:date) { Date.tomorrow }
-
     let(:event) do
       create(:event,
-             title: title,
-             description: description,
-             date: date,
+             title: 'Original title',
+             description: 'Original description',
+             date: Date.tomorrow,
              user_ids: [user.id])
     end
-
     let(:updated_title) { 'Updated title' }
     let(:updated_description) { 'Updated description' }
     let(:updated_date) { Date.tomorrow + 2 }
-
     let(:updated_event_params) do
       {
         event: {
           title: updated_title,
           description: updated_description,
-          date: updated_date
+          date: updated_date,
+          user_ids: [user.id]
+        }
+      }
+    end
+    let(:another_user) { create(:user) }
+    let(:another_user_params) do
+      {
+        event: {
+          title: updated_title,
+          description: updated_description,
+          date: updated_date,
+          user_ids: [user.id, another_user.id]
         }
       }
     end
@@ -157,6 +168,12 @@ RSpec.describe 'Event' do
       put "/api/v1/events/#{event.id}", params: updated_event_params
 
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'Adding user to event' do
+      expect do
+        put "/api/v1/events/#{event.id}", params: another_user_params
+      end.to change(EventUser, :count).by(2)
     end
   end
 

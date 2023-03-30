@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class EventsController < ApplicationController
+    class EventsController < Api::V1::ApplicationController
       def index
         events = Event.all
         render json: EventSerializer.new(events)
@@ -13,9 +13,8 @@ module Api
       end
 
       def create
-        event = Event.new(event_params)
-
-        if event.save
+        event = Event::Create.call(event_params, current_user)
+        if event.valid?
           render(json: 'Event was successfully created'.to_json, status: :created)
         else
           render(json: event.errors.full_messages, status: :unprocessable_entity)

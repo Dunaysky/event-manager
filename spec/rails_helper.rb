@@ -10,6 +10,7 @@ require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
+require 'devise'
 require 'rspec/rails'
 require 'support/request_spec_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -78,6 +79,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction
