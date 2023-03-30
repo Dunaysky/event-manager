@@ -1,0 +1,130 @@
+@import './colors.scss';
+
+.timetable {
+  &-title {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: $blue-600;
+    text-align: center;
+    margin-top: 5rem;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(10rem, 1fr));
+    grid-template-rows: 1fr repeat(5, minmax(10rem, auto));
+    gap: 0;
+    margin: 0 5rem 5rem 5rem;
+    background-color: $white;
+    box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  &-today-pointer {
+    p:first-child {
+      background-color: $blue-600;
+      color: $white;
+    }
+  }
+
+  &-day-of-week-wrapper {
+    height: fit-content;
+    color: $gray-800;
+    font-size: 2rem;
+    border: 1px solid $gray-300;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  &-day-of-month {
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid $gray-300;
+    }
+
+    &-title {
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      height: 4rem;
+      min-width: 4rem;
+      background: inherit;
+      border-radius: 50%;
+      color: $gray-800;
+      font-size: 2rem;
+
+      &:hover {
+        background-color: $gray-300;
+        color: $blue-600;
+      }
+
+      &-inactive {
+        color: $gray-400 !important;
+
+        &:hover {
+          background: none;
+        }
+      }
+    }
+
+    &-event {
+      text-decoration: none;
+      background-color: $sky-600;
+      font-size: 1.5rem;
+      color: $white;
+      border-radius: 1.2rem;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+    }
+  }
+
+  &-calendar-actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 5rem 5rem 1rem 5rem;
+
+    button {
+      border: none;
+      background: none;
+      font-size: 1.8rem;
+      color: $gray-800;
+      font-weight: 700;
+      padding: 1.2rem 1.6rem;
+    }
+  }
+
+  &-month-controller-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid $gray-300;
+    border-radius: 1.6rem;
+    padding: 0.8rem 1.2rem;
+    margin-left: 1rem;
+
+    img {
+      width: 2rem;
+    }
+    img:first-child {
+      margin-right: 2rem;
+    }
+    img:last-child {
+      margin-left: 2rem;
+    }
+
+    p {
+      font-size: 1.8rem;
+    }
+  }
+}

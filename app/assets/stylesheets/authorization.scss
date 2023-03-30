@@ -1,0 +1,81 @@
+@import './colors.scss';
+
+.authorization {
+  &-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-space-between {
+    margin-top: 2rem;
+  }  
+
+  &-form {
+    &-wrapper {
+      width: 40rem;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 3rem;
+      border-radius: 0.6rem;
+      box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      background-color: $white;
+    }
+
+    &-logo {
+      align-self: center;
+      height: 5rem;
+    }
+  }
+
+  &-input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid $gray-300;
+    background-color: $white;
+    border-radius: 1.2rem;
+    color: $gray-800;
+    font-size: 1.4rem;
+
+    &-label {
+      font-size: 1.6rem;
+      color: $gray-800;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &-submit-button {
+    align-self: center;
+    width: fit-content;
+    border: none;
+    text-decoration: none;
+    background-color: $blue-600;
+    color: $white;
+    font-size: 1.6rem;
+    border-radius: 1.2rem;
+    padding: 1.2rem 2.4rem;
+  }
+
+  &-additional-message {
+    align-self: center;
+    font-size: 1.4rem;
+    color: $gray-800;
+
+    a {
+      text-decoration: none;
+      font-size: 1.4rem;
+      color: $blue-600;
+    }
+  }
+
+  &-helper-text {
+    font-size: 1.2rem;
+    color: $gray-800;
+    margin-top: 0.5rem;
+  }
+}

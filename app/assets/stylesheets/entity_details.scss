@@ -1,0 +1,70 @@
+@import './colors.scss';
+
+.entity-details {
+  &-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-header-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    p {
+      position: absolute;
+      width: 100%;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      color: $blue-600;
+    }
+    a {
+      text-decoration: none;
+      position: relative;
+      img {
+        width: 3rem;
+      }
+    }
+  }
+
+  &-data-field {
+    &-wrapper {
+      display: flex;
+      flex-direction: row;
+      margin-top: 2rem;
+      
+      p {
+        font-size: 1.6rem;
+        color: $gray-800;
+      }
+      p:first-child {
+        font-weight: 700;
+        flex-basis: 10rem;
+      }
+    }
+
+    &-with-multiple-values-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+
+      p {
+        font-size: 1.6rem;
+        color: $gray-800;
+        margin: 1rem 0 0 1.5rem;
+      }
+      p:first-child {
+        font-weight: 700;
+        margin: 0 !important;
+      }
+    }
+  }
+}
