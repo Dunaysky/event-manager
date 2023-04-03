@@ -1,0 +1,27 @@
+<div class="authorization-wrapper">
+  <h2 class="timetable-title">Log in</h2>
+  
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email, class: 'authorization-input-label' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'authorization-input' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: 'authorization-input-label' %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: 'authorization-input' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, class: 'authorization-input-label' %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: 'authorization-submit-button' %>
+      </div>
+    <% end %>
+  <%= render "devise/shared/links" %>
+</div>
