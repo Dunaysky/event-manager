@@ -3,17 +3,13 @@
     <div class="authorization-form-wrapper">
       <div class="entity-details-header-wrapper">
         <p>Account Details</p>
-        <a href="/account/edit">
+        <a href="/users/edit">
           <%= image_tag('EditIcon.svg', alt: 'Edit') %>
         </a>
       </div>
       <div class="entity-details-data-field-wrapper">
-        <p>Username:</p>
-        <p></p>
-      </div>
-      <div class="entity-details-data-field-wrapper">
         <p>First name:</p>
-        <p></p>
+        <p id="user-first-name"></p>
       </div>
       <div class="entity-details-data-field-wrapper">
         <p>Last Name:</p>
@@ -23,6 +19,7 @@
         <p>Email:</p>
         <p></p>
       </div>
+      <%= javascript_include_tag 'getUsers' %>
     </div>
   </div>
 </div>

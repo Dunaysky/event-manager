@@ -37,7 +37,7 @@
   }
 
   &-input {
-    width: 100%;
+    width: 20%;
     padding: 1rem 1.2rem;
     border: 1px solid $gray-300;
     background-color: $white;
@@ -46,13 +46,13 @@
     font-size: 1.4rem;
 
     &-label {
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: $gray-800;
       margin-bottom: 0.5rem;
     }
 
     &-link {
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: $blue-600;
       margin-bottom: 0.7rem;
     }
