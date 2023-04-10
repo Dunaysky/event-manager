@@ -39,15 +39,16 @@
     &-wrapper {
       display: flex;
       flex-direction: row;
-      margin-top: 2rem;
+      margin-top: 1rem;
       
       p {
         font-size: 1.6rem;
         color: $gray-800;
+        padding-left: 0.7rem;
       }
       p:first-child {
         font-weight: 700;
-        flex-basis: 10rem;
+        flex-basis: 15rem;
       }
     }
 
@@ -59,7 +60,6 @@
       p {
         font-size: 1.6rem;
         color: $gray-800;
-        margin: 1rem 0 0 1.5rem;
       }
       p:first-child {
         font-weight: 700;

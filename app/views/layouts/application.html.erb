@@ -12,7 +12,9 @@
 
   <body>
     <div class="header-wrapper">
-      <%= image_tag('Logo.png', alt: 'Logo', class: 'header-logo')%>
+      <%= link_to '/' do %>
+        <%= image_tag('Logo.png', alt: 'Logo', class: 'header-logo')%>
+      <% end %>
       <div class="header-actions-wrapper">
         <%= link_to 'My account', '/account', class: 'header-actions-secondary-button' %>
         <%= link_to 'Add new event', '/events/new', class: 'header-actions-primary-button' %>
