@@ -24,9 +24,9 @@ const formDayOfMonth = (number, { inactive = false, isToday = false}) => {
 }
 
 const renderCalendar = () => {
-  const firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+  const firstDayofMonth = new Date(currYear, currMonth, 0).getDay(), // getting first day of month
   lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
-  lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+  lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth-1).getDay(), // getting last day of month
   lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
   let elements = [];
 
@@ -34,8 +34,8 @@ const renderCalendar = () => {
     elements.push(`<div class="timetable-day-of-week-wrapper">${name}</div>`)
   })
 
-  for (let i = firstDayofMonth - 1; i > 0; i--) {
-    elements.push(formDayOfMonth(lastDateofLastMonth - i + 1, { inactive: true }))
+  for (let i = firstDayofMonth - 1; i >= 0; i--) {
+    elements.push(formDayOfMonth(lastDateofLastMonth - i, { inactive: true }))
   }
 
   for (let i = 1; i <= lastDateofMonth; i++) {
@@ -44,9 +44,11 @@ const renderCalendar = () => {
       currYear === new Date().getFullYear();
     elements.push(formDayOfMonth(i, { isToday }));
   }
-
-  for (let i = lastDayofMonth; i < 7; i++) {
-    elements.push(formDayOfMonth(i - lastDayofMonth + 1, { inactive: true }))
+  
+  let daysNextMonth = 7;
+  if (elements.length <= 42) daysNextMonth+=7;
+  for (let i = lastDayofMonth + 1; i < daysNextMonth; i++) {
+    elements.push(formDayOfMonth(i - lastDayofMonth, { inactive: true }))
   }
 
   monthTitle.innerHTML = `${months[currMonth]} ${currYear}`
