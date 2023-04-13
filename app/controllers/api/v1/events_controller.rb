@@ -36,7 +36,9 @@ module Api
       private
 
       def event_params
-        params.require(:event).permit(:title, :description, :date, user_ids: [])
+        all_params = params.require(:event).permit(:title, :description, :date, user_ids: [])
+        all_params[:user_ids] = params[:user_ids] if params[:user_ids]
+        all_params
       end
 
       def event

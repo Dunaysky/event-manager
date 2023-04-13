@@ -1,14 +1,21 @@
-const baseUrl = 'http://127.0.0.1:3000';
+// import { ApiController } from './api_controller.js';
+
 const usersFirstName = document.querySelector(".user-first-name");
 const usersLastName = document.querySelector(".user-last-name");
 const usersEmail = document.querySelector(".user-email");
+const { get } = ApiController();
 
-let url = `${baseUrl}/api/v1/users/1/current_user_details`
-fetch(url)
-  .then(response => response.json())
-  .then(commits => {
-    usersFirstName.innerHTML = commits.data.attributes.first_name;
-    usersLastName.innerHTML = commits.data.attributes.last_name;
-    usersEmail.innerHTML = commits.data.attributes.email;
-  })
+const getDetails = async () => {
+  let url = `/api/v1/users/1/current_user_details`
+  const response = await get(url);
 
+  if (response.message) {
+    alert(response.message ?? 'Something went wrong');
+  } else {
+    usersFirstName.innerHTML = response.data.attributes.first_name;
+    usersLastName.innerHTML = response.data.attributes.last_name;
+    usersEmail.innerHTML = response.data.attributes.email;
+  }
+}
+
+getDetails();
