@@ -5,11 +5,11 @@ module Api
     class EventsController < Api::V1::ApplicationController
       def index
         events = Event.all
-        render json: EventSerializer.new(events)
+        render json: EventSerializer.new(events, params: { current_user: current_user })
       end
 
       def show
-        render json: EventSerializer.new(event)
+        render json: EventSerializer.new(event, params: { current_user: current_user })
       end
 
       def create

@@ -1,25 +1,4 @@
 <div>
-  <div class="entity-details-wrapper">
-    <div class="authorization-form-wrapper">
-      <div class="entity-details-header-wrapper">
-        <p>Adding event</p>
-      </div>
-      <p class="authorization-input-label authorization-space-between">Event title</p>
-      <input class="authorization-input" placeholder="Enter event title"/>
-      <p class="authorization-input-label authorization-space-between">Event description</p>
-      <input class="authorization-input" placeholder="Enter event description" type="text"/>
-      <p class="authorization-input-label authorization-space-between">Event date</p>
-      <input class="authorization-input" placeholder="Enter date of event" type="date"/>
-      <p class="authorization-input-label authorization-space-between">Invited users</p>
-      <input class="authorization-input" placeholder="Enter users email" type="email"/>
-      <p class="authorization-helper-text">Separate emails by space to invite multiple users</p>
-      <div class="header-actions-wrapper">
-        <a class="header-actions-secondary-button" href="/">Cancel</a>
-        <button class="header-actions-primary-button create-button">Create event</button> 
-        <%= javascript_include_tag 'api_controller' %>
-        <%= javascript_include_tag 'addNewEvent' %>
-      </div>
-      
-    </div>
-  </div>
+  <%= render partial: 'form', locals: { create: true }%>
+  <%= javascript_include_tag 'addEvent' %>
 </div>

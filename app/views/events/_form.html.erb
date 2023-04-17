@@ -1,0 +1,23 @@
+<div class="entity-details-wrapper">
+  <%= javascript_include_tag 'apiController' %>
+  <%= javascript_include_tag 'eventForm' %>
+  <div class="authorization-form-wrapper">
+    <div class="entity-details-header-wrapper">
+      <p><%= create ? 'Add' : 'Edit' %> event</p>
+    </div>
+    <p class="authorization-input-label authorization-space-between">Event title</p>
+    <input class="authorization-input" placeholder="Enter event title"/>
+    <p class="authorization-input-label authorization-space-between">Event description</p>
+    <input class="authorization-input" placeholder="Enter event description" type="text"/>
+    <p class="authorization-input-label authorization-space-between">Event date</p>
+    <input class="authorization-input" placeholder="Enter date of event" type="date"/>
+    <div class="invited-users-list">
+      <p class="authorization-input-label title">Invited Users</p>
+    </div>
+    <select name="Invite User" class="invite-user-selector authorization-input"></select>
+    <div class="header-actions-wrapper">
+      <a class="header-actions-secondary-button" href="/">Cancel</a>
+      <button class="header-actions-primary-button create-button"><%= create ? 'Create' : 'Save' %> event</button> 
+    </div>
+  </div>
+</div>

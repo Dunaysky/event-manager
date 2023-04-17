@@ -76,12 +76,16 @@
 
     &-event {
       text-decoration: none;
-      background-color: $sky-600;
+      background-color: $orange-400;
       font-size: 1.5rem;
       color: $white;
       border-radius: 1.2rem;
       padding: 1rem 1.5rem;
       margin-top: 1rem;
+
+      &-creator {
+        background-color: $sky-600 !important;
+      }
     }
   }
 

@@ -13,23 +13,57 @@ const months = ["January", "February", "March", "April", "May", "June", "July",
 
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-const formDayOfMonth = (number, { inactive = false, isToday = false}) => {
+const formDayOfMonth = (number, { events = null, inactive = false, isToday = false }) => {
   return `<div class="timetable-day-of-month-wrapper">\
     <p class="timetable-day-of-month-title ${
       inactive ? 'timetable-day-of-month-title-inactive' : ''
     }${
       isToday ? 'timetable-today-pointer' : ''
     }">${number}</p>\
+    ${events?.map(event => formEventBlock(event))?.join('') ?? ''}
   </div>`
 }
 
-const renderCalendar = () => {
+const formEventBlock = event => {
+  return `<a href="/events/${event.id}" class="timetable-day-of-month-event ${
+    event.attributes.creator ? 'timetable-day-of-month-event-creator' : ''
+  }">\
+    ${event.attributes.title}\
+  </a>`
+}
+
+const fetchEvents = async () => {
+  const { get } = ApiController();
+  let events = {};
+  let url = '/api/v1/events';
+  let response = await get(url);
+  if (response.message) {
+    alert(response.message ?? 'Something went wrong');
+  } else {
+    response.data.forEach(event => {
+      const eventDate = new Date(event.attributes.event_date.split('-'))
+      if (currMonth === eventDate.getMonth() &&
+        currYear === eventDate.getFullYear()) {
+          const day = eventDate.getDate();
+          if (events[day])
+            events[day].push(event);
+          else
+            events[day] = [event]
+      }
+    });
+  };
+  return events;
+}
+
+const renderCalendar = async () => {
   const firstDayofMonth = new Date(currYear, currMonth, 0).getDay(), // getting first day of month
   lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
   lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth-1).getDay(), // getting last day of month
   lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
   let elements = [];
-
+  
+  const events = await fetchEvents();
+    
   daysOfWeek.forEach(name => {
     elements.push(`<div class="timetable-day-of-week-wrapper">${name}</div>`)
   })
@@ -42,7 +76,7 @@ const renderCalendar = () => {
     const isToday = i === date.getDate() &&
       currMonth === new Date().getMonth() &&
       currYear === new Date().getFullYear();
-    elements.push(formDayOfMonth(i, { isToday }));
+    elements.push(formDayOfMonth(i, { events: events[i], isToday }));
   }
   
   let daysNextMonth = 7;

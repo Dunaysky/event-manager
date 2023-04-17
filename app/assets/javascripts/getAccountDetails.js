@@ -1,5 +1,3 @@
-// import { ApiController } from './api_controller.js';
-
 const usersFirstName = document.querySelector(".user-first-name");
 const usersLastName = document.querySelector(".user-last-name");
 const usersEmail = document.querySelector(".user-email");

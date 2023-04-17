@@ -1,0 +1,27 @@
+<div class="entity-details-wrapper">
+  <div class="authorization-form-wrapper">
+    <div class="entity-details-header-wrapper">
+      <p>Event Details</p>
+      <%= link_to "/events/#{params[:id]}/edit" do %>
+        <%= image_tag('EditIcon.svg', alt: 'Edit', class: 'header-logo')%>
+      <% end %>
+    </div>
+    <div class="entity-details-data-field-wrapper">
+      <p>Event title:</p>
+      <p></p>
+    </div>
+    <div class="entity-details-data-field-wrapper">
+      <p>Event description:</p>
+      <p></p>
+    </div>
+    <div class="entity-details-data-field-wrapper">
+      <p>Event date:</p>
+      <p></p>
+    </div>
+    <div class="entity-details-data-field-with-multiple-values-wrapper">
+      <p>Invited users:</p>
+    </div>
+  </div>
+  <%= javascript_include_tag 'apiController' %>
+  <%= javascript_include_tag 'eventDetails' %>
+</div>
