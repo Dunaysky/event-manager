@@ -2,5 +2,8 @@
 
 class UserEmailIdSerializer
   include JSONAPI::Serializer
-  attributes :email, :id
+  attributes :id
+  attribute :full_name do |object|
+    "#{object.first_name} #{object.last_name}"
+  end
 end

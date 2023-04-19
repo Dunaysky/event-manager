@@ -12,7 +12,7 @@ module Api
         render json: UserSerializer.new(current_user)
       end
 
-      def users_email_id
+      def users_name_id
         users = User.all
         render json: UserEmailIdSerializer.new(users)
       end

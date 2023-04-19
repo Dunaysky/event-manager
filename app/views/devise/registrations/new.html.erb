@@ -1,40 +1,42 @@
-<div class="authorization-wrapper">
-  <h2 class="authorization-title">Sign up</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    
-    <div class="field">
-      <%= f.label :first_name, class: 'authorization-input-label' %><br />
-      <%= f.text_field :first_name, class: 'authorization-input', placeholder: true %>
-    </div>
+<div class="entity-details-wrapper">
+  <div class="authorization-form-wrapper">
+    <h2 class="authorization-title">Sign up</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      
+      <div class="field">
+        <%= f.label :first_name, class: 'authorization-input-label' %><br />
+        <%= f.text_field :first_name, class: 'authorization-input', placeholder: true %>
+      </div>
 
-    <div class="field">
-      <%= f.label :last_name, class: 'authorization-input-label' %><br />
-      <%= f.text_field :last_name, class: 'authorization-input', placeholder: true %>
-    </div>
+      <div class="field">
+        <%= f.label :last_name, class: 'authorization-input-label' %><br />
+        <%= f.text_field :last_name, class: 'authorization-input', placeholder: true %>
+      </div>
 
-    <div class="field">
-      <%= f.label :email, class: 'authorization-input-label' %><br />
-      <%= f.email_field :email, autocomplete: "email", class: 'authorization-input' %>
-    </div>
+      <div class="field">
+        <%= f.label :email, class: 'authorization-input-label' %><br />
+        <%= f.email_field :email, autocomplete: "email", class: 'authorization-input' %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password, class: 'authorization-input-label' %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: 'authorization-input' %>
-    </div>
+      <div class="field">
+        <%= f.label :password, class: 'authorization-input-label' %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'authorization-input' %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation, class: 'authorization-input-label' %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'authorization-input' %>
-    </div>
+      <div class="field">
+        <%= f.label :password_confirmation, class: 'authorization-input-label' %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'authorization-input' %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit "Sign up", class: 'authorization-submit-button' %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= f.submit "Sign up", class: 'authorization-submit-button' %>
+      </div>
+    <% end %>
 
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+  </div>
 </div>

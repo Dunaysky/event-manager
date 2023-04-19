@@ -5,8 +5,8 @@ const daysWrapper = document.querySelector(".timetable-grid"),
   todayButton = document.querySelector("#today-button");
 
 let date = new Date(),
-  currYear = date.getFullYear(),
-  currMonth = date.getMonth();
+  currYear = date.getUTCFullYear(),
+  currMonth = date.getUTCMonth();
 
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
@@ -37,8 +37,11 @@ const fetchEvents = async () => {
   let events = {};
   let url = '/api/v1/events';
   let response = await get(url);
-  if (response.message) {
-    alert(response.message ?? 'Something went wrong');
+  if (response.error)
+    if(response.error == "You need to sign in or sign up before continuing.") {
+      window.location.href = "/users/sign_in";
+    } else {
+      addNotification('error', response.error ?? 'Something went wrong');
   } else {
     response.data.forEach(event => {
       const eventDate = new Date(event.attributes.event_date.split('-'))
@@ -73,9 +76,9 @@ const renderCalendar = async () => {
   }
 
   for (let i = 1; i <= lastDateofMonth; i++) {
-    const isToday = i === date.getDate() &&
-      currMonth === new Date().getMonth() &&
-      currYear === new Date().getFullYear();
+    const isToday = i === date.getUTCDate() &&
+      currMonth === new Date().getUTCMonth() &&
+      currYear === new Date().getUTCFullYear();
     elements.push(formDayOfMonth(i, { events: events[i], isToday }));
   }
   

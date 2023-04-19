@@ -5,14 +5,14 @@ const inviteUserSelector = document.querySelector('.invite-user-selector')
 const invitedUsersList = document.querySelector('.invited-users-list')
 const saveButton = document.querySelector('.create-button')
 const eventId = window.location.pathname.split('/').slice(-2)[0];
-let userEmails = {};
+let userNames = {};
 
 const getEventDetails = async () => {
   const url = `/api/v1/events/${eventId}`
   const response = await get(url);
 
-  if (response.message) {
-    alert(response.message ?? 'Something went wrong');
+  if (response.Error) {
+    addNotification('error', response.Error ?? 'Something went wrong');
   } else {
     await initInviteUserComponents();
     const eventDetails = response.data.attributes
@@ -31,12 +31,15 @@ const onSaveButtonClick = async () => {
   const url = `/api/v1/events/${eventId}`
   response = await put(url, resultData);
 
-  if (response.message) {
-    alert(response.message ?? 'Something went wrong');
+  if (response.error) {
+    addNotification('error', response.error ?? 'Something went wrong');
   } else {
-    alert('Event was successfully saved');
+    addNotification('success', 'Event saved successfully');
   }
-  window.location.href = `/events/${eventId}`
+  setTimeout(
+    () => window.location.href = `/events/${eventId}`,
+    3000
+  );
 }
 
 getEventDetails();

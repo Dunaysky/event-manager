@@ -7,13 +7,13 @@ const collectDataFromForm = () => {
 };
 
 const fetchAvailableUsers = async () => {
-  let url = '/api/v1/users/1/users_email_id';
+  let url = '/api/v1/users/1/users_name_id';
   let response = await get(url);
 
-  if (response.message) {
-    alert(response.message ?? 'Something went wrong');
+  if (response.error) {
+    addNotification('error', response.error ?? 'Something went wrong');
   } else {
-    response.data.forEach(element => userEmails[element.attributes.id] = element.attributes.email);
+    response.data.forEach(element => userNames[element.attributes.id] = element.attributes.full_name);
   };
 }
 
@@ -37,7 +37,7 @@ const formInvitedUserBlock = (id, email) => {
 const initInviteUserComponents = async () => {
   await fetchAvailableUsers();
   let inviteUserSelectorOptions = ['<option value="" class="invite-user-selector-option">Invite User</option>'];
-  Object.entries(userEmails).forEach(([id, email]) => {
+  Object.entries(userNames).forEach(([id, email]) => {
     inviteUserSelectorOptions.push(
       `<option value="${id}" class="invite-user-selector-option">${email}</option>`
     )
@@ -56,7 +56,7 @@ const inviteUser = userId => {
   inviteUserSelector.value = ''
   if (alreadyInvitedUser(userId)) return;
 
-  const newInvitedUser = formInvitedUserBlock(userId, userEmails[userId])
+  const newInvitedUser = formInvitedUserBlock(userId, userNames[userId])
   invitedUsersList.appendChild(newInvitedUser)
 }
 

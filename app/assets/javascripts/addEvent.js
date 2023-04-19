@@ -3,7 +3,7 @@ const inviteUserSelector = document.querySelector('.invite-user-selector')
 const invitedUsersList = document.querySelector('.invited-users-list')
 const inputElements = document.querySelectorAll('.authorization-input')
 const createButton = document.querySelector('.create-button')
-let userEmails = {};
+let userNames = {};
 
 const onCreateButtonClick = async () => {
   const resultData = collectDataFromForm();
@@ -11,12 +11,15 @@ const onCreateButtonClick = async () => {
   const url = '/api/v1/events'
   response = await post(url, resultData);
 
-  if (response.message) {
-    alert(response.message ?? 'Something went wrong');
+  if (response.error) {
+    addNotification('error', response.error ?? 'Something went wrong');
   } else {
-    alert('Event was successfully created');
+    addNotification('success', 'Event created successfully');
   }
-  window.location.href = '/'
+  setTimeout(
+    () => window.location.href = '/',
+    3000
+  );
 };
 
 initInviteUserComponents();
