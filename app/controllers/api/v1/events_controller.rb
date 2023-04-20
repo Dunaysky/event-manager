@@ -46,7 +46,7 @@ module Api
       end
 
       def current_user_params
-        {params: { current_user: current_user }}
+        { params: { current_user: current_user } }
       end
     end
   end

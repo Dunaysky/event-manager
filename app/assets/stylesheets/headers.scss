@@ -15,7 +15,13 @@
   }
 
   &-logo {
-    height: 3.5rem;
+    height: 5.5rem;
+    margin-left: 1rem;
+
+    &-wrapper{
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   &-actions {
@@ -62,4 +68,11 @@
   color: $gray-800;
   font-weight: 700;
   padding: 1rem 1.2rem;
+}
+.empty-button{
+  background: none;
+  border: none
+}
+.delete-button{
+  margin-top: 1rem;
 }

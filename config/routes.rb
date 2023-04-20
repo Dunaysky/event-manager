@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   get '/account', to: 'account#current_account'
   resources :events, only: %i[show new edit]
-  # resources :users
 
   namespace :api do
     namespace :v1 do
@@ -16,5 +15,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "home_page#index" #"home_page#index"
+  root to: "home_page#index"
 end

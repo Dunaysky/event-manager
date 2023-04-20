@@ -36,9 +36,19 @@ const ApiController = () => {
       .catch((error) => error);
   };
 
+  const destroy = async (url) => {
+    return await fetch(`${baseUrl}${url}`, {
+      headers: headers,
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .catch((error) => error);
+  };
+
   return {
     get,
     post,
     put,
+    destroy
   };
 };
