@@ -30,7 +30,7 @@ module Api
       end
 
       def destroy
-        event.delete
+        event.destroy
       end
 
       private
