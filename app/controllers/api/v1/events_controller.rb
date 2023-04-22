@@ -29,9 +29,7 @@ module Api
         end
       end
 
-      def destroy
-        event.destroy
-      end
+      delegate :destroy, to: :event
 
       private
 
