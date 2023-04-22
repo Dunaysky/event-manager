@@ -1,4 +1,5 @@
-const baseUrl = 'http://127.0.0.1:3000';
+const baseUrl = window._base_url;
+console.log(baseUrl);
 const headers = {
   'Content-Type': 'application/json',
   Accept: 'application/json',
