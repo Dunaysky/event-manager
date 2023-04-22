@@ -8,6 +8,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "timetable", "data-turbo-track": "reload" %>
+    <%= javascript_tag do %>
+      window._base_url = "<%= ENV.fetch('BASE_URL', 'http://127.0.0.1:3000') %>"
+    <% end %>
   </head>
 
   <body>
