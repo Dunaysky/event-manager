@@ -72,8 +72,8 @@ RSpec.describe 'Event' do
 
       expect(json.dig('data', 'attributes', 'title'))
         .to eq(event.title)
-      expect(json.dig('data', 'attributes', 'eventDate'))
-        .to eq(event.date.to_fs(:short))
+      expect(json.dig('data', 'attributes', 'event_date'))
+        .to eq(event.date.strftime('%F'))
       expect(json.dig('data', 'attributes', 'description'))
         .to eq(event.description)
     end
@@ -97,7 +97,7 @@ RSpec.describe 'Event' do
     let!(:first_event) { events.first }
     let(:description_path) { %w[attributes description] }
     let(:title_path) { %w[attributes title] }
-    let(:date_path) { %w[attributes eventDate] }
+    let(:date_path) { %w[attributes event_date] }
     let(:event_to_compare) do
       json['data'].find do |event|
         event['id'].to_i == first_event.id
@@ -118,7 +118,7 @@ RSpec.describe 'Event' do
       expect(event_to_compare.dig(*title_path))
         .to eq(first_event.title)
       expect(event_to_compare.dig(*date_path))
-        .to eq(first_event.date.to_fs(:short))
+        .to eq(first_event.date.strftime('%F'))
     end
   end
 

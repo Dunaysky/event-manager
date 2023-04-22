@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class UserSerializer
+class UserEmailIdSerializer
   include JSONAPI::Serializer
-  attributes :first_name, :last_name, :email
+  attributes :id
   attribute :full_name do |object|
     "#{object.first_name} #{object.last_name}"
   end

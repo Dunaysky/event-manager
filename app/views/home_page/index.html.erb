@@ -1,0 +1,16 @@
+<div>
+  <p class="timetable-title">Your Timetable</p>
+  <div class="timetable-calendar-actions-wrapper">
+    <div class="timetable-month-controller-wrapper">
+      <%= image_tag('ArrowLeftIcon.svg', alt: 'Prev', id: 'previous-button')%>
+      <p id="month-title">June</p>
+      <%= image_tag('ArrowRightIcon.svg', alt: 'Next', id: 'next-button')%>
+    </div>
+    <button id="today-button">Today</button>
+  </div>
+  <div class="timetable-grid"></div>
+  
+  <%= javascript_include_tag 'apiController' %>
+  <%= javascript_include_tag 'toaster' %>
+  <%= javascript_include_tag 'timetableController' %>
+</div>

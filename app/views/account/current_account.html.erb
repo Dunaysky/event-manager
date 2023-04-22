@@ -1,0 +1,27 @@
+<div>
+  <div class="entity-details-wrapper">
+    <div class="authorization-form-wrapper">
+      <div class="entity-details-header-wrapper">
+        <p>Account Details</p>
+        <a href="/users/edit">
+          <%= image_tag('EditIcon.svg', alt: 'Edit') %>
+        </a>
+      </div>
+      <div class="entity-details-data-field-wrapper">
+        <p>First name: </p>
+        <p class="user-first-name"></p>
+      </div>
+      <div class="entity-details-data-field-wrapper">
+        <p>Last Name: </p>
+        <p class="user-last-name"></p>
+      </div>
+      <div class="entity-details-data-field-wrapper">
+        <p>Email: </p>
+        <p class="user-email"></p>
+      </div>
+      <%= javascript_include_tag 'apiController' %>
+      <%= javascript_include_tag 'toaster' %>
+      <%= javascript_include_tag 'getAccountDetails' %>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,11 @@ module Api
       def current_user_details
         render json: UserSerializer.new(current_user)
       end
+
+      def users_name_id
+        users = User.all
+        render json: UserEmailIdSerializer.new(users)
+      end
     end
   end
 end

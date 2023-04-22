@@ -5,11 +5,11 @@ module Api
     class EventsController < Api::V1::ApplicationController
       def index
         events = Event.all
-        render json: EventSerializer.new(events)
+        render json: EventSerializer.new(events, current_user_params)
       end
 
       def show
-        render json: EventSerializer.new(event)
+        render json: EventSerializer.new(event, current_user_params)
       end
 
       def create
@@ -29,18 +29,22 @@ module Api
         end
       end
 
-      def destroy
-        event.delete
-      end
+      delegate :destroy, to: :event
 
       private
 
       def event_params
-        params.require(:event).permit(:title, :description, :date, user_ids: [])
+        all_params = params.require(:event).permit(:title, :description, :date, user_ids: [])
+        all_params[:user_ids] = params[:user_ids] if params[:user_ids]
+        all_params
       end
 
       def event
         @event = Event.find(params[:id])
+      end
+
+      def current_user_params
+        { params: { current_user: current_user } }
       end
     end
   end

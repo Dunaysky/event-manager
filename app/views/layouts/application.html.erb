@@ -7,9 +7,20 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "timetable", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+    <div class="header-wrapper">
+      <%= link_to '/' do %>
+        <%= image_tag('LogoEnote.png', alt: 'Logo', class: 'header-logo')%>
+      <% end %>
+      <div class="header-actions-wrapper">
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'header-actions-secondary-button' %>
+        <%= link_to 'My account', '/account', class: 'header-actions-secondary-button' %>
+        <%= link_to 'Add new event', '/events/new', class: 'header-actions-primary-button' %>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
