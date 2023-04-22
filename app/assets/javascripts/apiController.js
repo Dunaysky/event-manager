@@ -1,5 +1,4 @@
 const baseUrl = window._base_url;
-console.log(baseUrl);
 const headers = {
   'Content-Type': 'application/json',
   Accept: 'application/json',
