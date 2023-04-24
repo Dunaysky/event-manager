@@ -1,4 +1,3 @@
-const { get, destroy } = ApiController();
 const eventId = window.location.pathname.split('/').slice(-1)[0];
 const elements = document.querySelectorAll('.entity-details-data-field-wrapper');
 const userNamesElement = document.querySelector('.entity-details-data-field-with-multiple-values-wrapper');

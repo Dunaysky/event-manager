@@ -1,4 +1,3 @@
-const { get, post } = ApiController();
 const inviteUserSelector = document.querySelector('.invite-user-selector')
 const invitedUsersList = document.querySelector('.invited-users-list')
 const inputElements = document.querySelectorAll('.authorization-input')
