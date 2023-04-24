@@ -1,4 +1,3 @@
-const { get, put } = ApiController();
 const invitedUsersWrapper = document.querySelector('.entity-details-data-field-with-multiple-values-wrapper')
 const inputElements = document.querySelectorAll('.authorization-input')
 const inviteUserSelector = document.querySelector('.invite-user-selector')

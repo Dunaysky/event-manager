@@ -33,7 +33,6 @@ const formEventBlock = event => {
 }
 
 const fetchEvents = async () => {
-  const { get } = ApiController();
   let events = {};
   let url = '/api/v1/events';
   let response = await get(url);
